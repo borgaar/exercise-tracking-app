@@ -30,11 +30,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  sqflite: ^2.3.0
+  geolocator: ^10.1.0
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +55,17 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+
+  fonts:
+    - family: Kanit
+      fonts:
+        - asset: fonts/Kanit-Medium.ttf
+        - asset: fonts/Kanit-Regular.ttf
+        - asset: fonts/Kanit-Bold.ttf
+          weight: 700
+    - family: Digital
+      fonts:
+        - asset: fonts/curved-seven-segment-2.otf
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
