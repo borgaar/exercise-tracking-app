@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:exercise_tracking_app/constants.dart';
-import 'package:exercise_tracking_app/widgets/home_page/running_summary_data_point.dart';
+import 'package:exercise_tracking_app/widgets/home_page/running_summary_datapoint.dart.dart';
+import 'package:exercise_tracking_app/widgets/home_page/running_summary_item.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -14,7 +15,7 @@ class RunningSummary extends StatefulWidget {
 
 class _RunningSummaryState extends State<RunningSummary> {
   bool _loading = true;
-  List<RunningSummaryDataPoint> _dataPoints = [];
+  List<RunningSummaryDatapoint> _dataPoints = [];
 
   @override
   void initState() {
@@ -32,7 +33,9 @@ class _RunningSummaryState extends State<RunningSummary> {
               width: MediaQuery.of(context).size.width,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: _dataPoints,
+                children: _dataPoints
+                    .map((e) => RunningSummaryItem(data: e))
+                    .toList(),
               ),
             ),
           );
@@ -49,24 +52,29 @@ class _RunningSummaryState extends State<RunningSummary> {
 
     double totalDistance = calculateTotalDistance(dataQuery);
     double totalDuration = calculateTotalDuration(dataQuery);
-    double avgSpeed = calculateAvgSpeed(totalDistance, totalDuration);
+
+    const kmsToKmh = 3600;
+    double avgSpeed = (totalDistance / totalDuration) * kmsToKmh;
 
     _dataPoints = [
-      RunningSummaryDataPoint(
-          icon: const Icon(Icons.directions_run_rounded),
-          title: "Total Distance",
-          value: totalDistance,
-          unit: "km"),
-      RunningSummaryDataPoint(
-          icon: const Icon(Icons.timer_rounded),
-          title: "Total Duration",
-          value: totalDuration,
-          unit: "s"),
-      RunningSummaryDataPoint(
-          icon: const Icon(Icons.speed_rounded),
-          title: "Average Speed",
-          value: avgSpeed,
-          unit: "km/h"),
+      RunningSummaryDatapoint(
+        title: "Total distance:",
+        value: totalDistance,
+        icon: const Icon(Icons.directions_run_rounded),
+        unit: "km",
+      ),
+      RunningSummaryDatapoint(
+        title: "Total running time:",
+        value: totalDuration,
+        icon: const Icon(Icons.timer),
+        unit: "min",
+      ),
+      RunningSummaryDatapoint(
+        title: "Average speed:",
+        value: avgSpeed,
+        icon: const Icon(Icons.speed),
+        unit: "km/h",
+      ),
     ];
 
     print("Fake loading start");
@@ -79,26 +87,15 @@ class _RunningSummaryState extends State<RunningSummary> {
   }
 
   double calculateTotalDistance(List<Map<String, dynamic>> data) {
-    double totalDistance = 0;
-
-    for (var row in data) {
-      totalDistance += double.parse(row["distance"].toString());
-    }
-
-    return totalDistance;
+    // Return sum of all distances
+    return data
+        .map((e) => e['distance'])
+        .reduce((value, element) => value + element);
   }
 
   double calculateTotalDuration(List<Map<String, dynamic>> data) {
-    double totalDuration = 0;
-
-    for (var row in data) {
-      totalDuration += double.parse(row["duration"].toString());
-    }
-
-    return totalDuration;
-  }
-
-  double calculateAvgSpeed(double distance, double duration) {
-    return distance / (duration / 3600);
+    return data
+        .map((e) => e['duration'])
+        .reduce((value, element) => value + element);
   }
 }
