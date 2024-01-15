@@ -6,9 +6,10 @@ class RunningSummaryDatapoint {
   final Icon icon;
   final String unit;
 
-  RunningSummaryDatapoint(
-      {required this.title,
-      required this.value,
-      required this.icon,
-      required this.unit});
+  RunningSummaryDatapoint({
+    required this.title,
+    required this.value,
+    required this.icon,
+    required this.unit,
+  });
 }

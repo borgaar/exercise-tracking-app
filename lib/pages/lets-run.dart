@@ -1,3 +1,4 @@
+import 'package:exercise_tracking_app/widgets/lets-run/permission-controller/location_permission_handler.dart';
 import 'package:exercise_tracking_app/widgets/lets-run/stopwatch.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -10,14 +11,13 @@ class LetsRun extends StatefulWidget {
 }
 
 class _LetsRunState extends State<LetsRun> {
-  bool _permissionPermanentDenied = false;
-  bool _loadingLocationPermission = false;
-  bool _hasLocationPermission = false;
+  final bool _permissionPermanentDenied = false;
+  final bool _loadingLocationPermission = false;
+  final bool _hasLocationPermission = false;
 
   @override
   void initState() {
     super.initState();
-    checkAndRequestLocationPermission();
   }
 
   @override
@@ -35,50 +35,11 @@ class _LetsRunState extends State<LetsRun> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            LocationPermissionHandler(),
             VisualStopwatch(),
           ],
         ),
       ),
     );
-  }
-
-  void checkAndRequestLocationPermission() async {
-    setState(() {
-      _loadingLocationPermission = true;
-    });
-
-    LocationPermission permission = await Geolocator.checkPermission();
-
-    if (permission == LocationPermission.deniedForever) {
-      setState(() {
-        _permissionPermanentDenied = true;
-        _hasLocationPermission = false;
-        _loadingLocationPermission = false;
-      });
-      return;
-    } else if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.deniedForever) {
-        setState(() {
-          _permissionPermanentDenied = true;
-          _hasLocationPermission = false;
-          _loadingLocationPermission = false;
-          return;
-        });
-      } else if (permission == LocationPermission.denied) {
-        setState(() {
-          _permissionPermanentDenied = false;
-          _hasLocationPermission = false;
-          _loadingLocationPermission = false;
-          return;
-        });
-      }
-    }
-
-    setState(() {
-      _permissionPermanentDenied = false;
-      _hasLocationPermission = true;
-      _loadingLocationPermission = false;
-    });
   }
 }

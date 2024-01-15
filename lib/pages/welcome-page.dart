@@ -7,8 +7,11 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-          child: Text("Exercise App",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
+        child: Text(
+          "Exercise App",
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
     );
   }
 }
