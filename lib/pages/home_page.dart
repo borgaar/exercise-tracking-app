@@ -8,30 +8,37 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'Home',
-            style: TextStyle(fontSize: 40),
-          ),
-          centerTitle: true,
+      appBar: AppBar(
+        title: const Text(
+          'Home',
+          style: TextStyle(fontSize: 40),
         ),
-        body: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          const SizedBox(height: 20),
-          const Text(
-            "Overview",
-            style: TextStyle(fontSize: 20),
-          ),
-          const SizedBox(height: 20),
-          const RunningSummary(),
-          const SizedBox(height: 80),
-          ElevatedButton(
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 20),
+            const Text(
+              "Overview",
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 20),
+            const RunningSummary(),
+            const SizedBox(height: 80),
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LetsRun()),
                 );
               },
-              child: const Text("Let's Run!"))
-        ]));
+              child: const Text("Let's Run!"),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

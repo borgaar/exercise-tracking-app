@@ -23,20 +23,23 @@ class _LetsRunState extends State<LetsRun> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                'Let\'s Run!',
-                style: TextStyle(fontSize: 40),
-              ),
-              centerTitle: true,
-            ),
-            body: const Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  VisualStopwatch(),
-                ])));
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Let\'s Run!',
+            style: TextStyle(fontSize: 40),
+          ),
+          centerTitle: true,
+        ),
+        body: const Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            VisualStopwatch(),
+          ],
+        ),
+      ),
+    );
   }
 
   void checkAndRequestLocationPermission() async {
