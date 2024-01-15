@@ -34,6 +34,7 @@ class ExerciseTrackingApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: defaultFont),
       home: const HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
