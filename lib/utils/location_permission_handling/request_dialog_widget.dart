@@ -1,4 +1,4 @@
-import 'package:exercise_tracking_app/widgets/lets-run/permission-controller/dialogs/permission_dialog_data.dart';
+import 'package:exercise_tracking_app/utils/location_permission_handling/request_dialog_data.dart';
 import 'package:flutter/material.dart';
 
 class PermissionDialog extends StatelessWidget {

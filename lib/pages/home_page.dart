@@ -1,4 +1,4 @@
-import 'package:exercise_tracking_app/pages/lets-run.dart';
+import 'package:exercise_tracking_app/pages/lets_run.dart';
 import 'package:exercise_tracking_app/widgets/home_page/running_summary.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const LetsRun()),
+                  MaterialPageRoute(builder: (context) => LetsRun()),
                 );
               },
               child: const Text("Let's Run!"),

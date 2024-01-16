@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -15,22 +13,24 @@ class PermissionDialogData {
   });
 }
 
-Map<LocationPermission, PermissionDialogData> generateDialogData(BuildContext context) {
+Map<LocationPermission, PermissionDialogData> generateDialogData(
+  BuildContext context,
+) {
   return {
     LocationPermission.denied: PermissionDialogData(
       title: "We are unable to trace your route!",
       description:
-          "In order to trace your route, the app must have GPS access.",
+          "In order to measure your running distance, we must have location access!",
       actions: [
         TextButton(
           onPressed: () async {
-            var permission = await Geolocator.requestPermission();
+            Navigator.pop(context);
+
+            LocationPermission permission =
+                await Geolocator.requestPermission();
 
             if (permission == LocationPermission.deniedForever) {
               await Geolocator.openAppSettings();
-            }
-            if (context.mounted) {
-              Navigator.pop(context);
             }
           },
           child: const Text(
@@ -63,6 +63,6 @@ Map<LocationPermission, PermissionDialogData> generateDialogData(BuildContext co
           ),
         ),
       ],
-    ), 
+    ),
   };
 }
