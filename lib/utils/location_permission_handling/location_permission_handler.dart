@@ -13,7 +13,8 @@ class LocationPermissionHandler {
     );
   }
 
-  Future<bool> checkPermission(BuildContext context, bool request) async {
+  Future<bool> checkAndRequestPermission(
+      BuildContext context, bool request) async {
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied && request) {

@@ -13,52 +13,55 @@ class _VisualStopwatchState extends State<VisualStopwatch> {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        if (_stopwatch.isRunning) {
-          _stopwatch.stop();
-        } else {
-          _stopwatch.start();
-          updateVisualStopWatch();
-        }
-      },
-      child: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(40)),
-          color: Colors.amber,
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.play_arrow_rounded,
-              size: 60,
-              color: Colors.white,
-            ),
-            Text(
-              elapsedPretty,
-              style: const TextStyle(
-                fontSize: 70,
-                color: Colors.white,
-                fontFamily: 'Digital',
-                letterSpacing: 5,
-              ),
-            ),
-            IconButton(
-              onPressed: () {
-                _stopwatch.reset();
-                setState(() {
-                  elapsedPretty = '00:00:00.0';
-                });
-              },
-              icon: const Icon(
-                Icons.restart_alt_outlined,
+    return Padding(
+      padding: const EdgeInsets.only(top: 50.0),
+      child: TextButton(
+        onPressed: () {
+          if (_stopwatch.isRunning) {
+            _stopwatch.stop();
+          } else {
+            _stopwatch.start();
+            updateVisualStopWatch();
+          }
+        },
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(40)),
+            color: Colors.blue,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.play_arrow_rounded,
                 size: 60,
                 color: Colors.white,
               ),
-            ),
-          ],
+              Text(
+                elapsedPretty,
+                style: const TextStyle(
+                  fontSize: 70,
+                  color: Colors.white,
+                  fontFamily: 'Digital',
+                  letterSpacing: 5,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  _stopwatch.reset();
+                  setState(() {
+                    elapsedPretty = '00:00:00.0';
+                  });
+                },
+                icon: const Icon(
+                  Icons.restart_alt_outlined,
+                  size: 60,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
