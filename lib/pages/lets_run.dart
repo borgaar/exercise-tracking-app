@@ -1,6 +1,5 @@
 import 'package:exercise_tracking_app/utils/location_permission_handling/location_permission_handler.dart';
-import 'package:exercise_tracking_app/widgets/lets-run/map.dart';
-import 'package:exercise_tracking_app/widgets/lets-run/stopwatch.dart';
+import 'package:exercise_tracking_app/widgets/lets-run/map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -14,44 +13,37 @@ class LetsRun extends StatefulWidget {
   State<LetsRun> createState() => _LetsRunState();
 }
 
-class _LetsRunState extends State<LetsRun> with WidgetsBindingObserver {
+class _LetsRunState extends State<LetsRun> {
   bool _hasLocationPermission = false;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     updateHasLocationPermissionState();
   }
 
   @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: [
-          _hasLocationPermission
-              ? TracingMap(
-                  context: context,
-                )
-              : const Text("NO LOCATION ACCESS"),
-          const SizedBox(
-            height: 30,
-          ),
-          const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                VisualStopwatch(),
-              ],
+    return Material(
+      child: Center(
+        child: Stack(
+          children: [
+            _hasLocationPermission
+                ? const TracingMap2()
+                : const Text("NO LOCATION ACCESS"),
+            const SizedBox(
+              height: 30,
             ),
-          ),
-        ],
+            const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  //VisualStopwatch(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -59,8 +51,6 @@ class _LetsRunState extends State<LetsRun> with WidgetsBindingObserver {
   Future<void> updateHasLocationPermissionState() async {
     _hasLocationPermission = await widget.locationPermissionHandler
         .checkAndRequestPermission(context, true);
-
-    print(_hasLocationPermission);
 
     setState(() {});
   }

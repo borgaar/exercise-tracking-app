@@ -1,6 +1,5 @@
 import 'package:exercise_tracking_app/constants.dart';
 import 'package:exercise_tracking_app/pages/home_page.dart';
-import 'package:exercise_tracking_app/pages/lets_run.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
